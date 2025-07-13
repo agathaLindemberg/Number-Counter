@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Contador de Envios</h2>
+
+    <div class="form-box">
+        <input type="number" [(ngModel)]="valor" (input)="resetarContagem()" (keydown)="somenteNumeros($event)"
+            placeholder="Digite um número" />
+        <button (click)="enviarValor()">Enviar</button>
+    </div>
+
+    <div class="resultado" *ngIf="contagem !== null">
+        <strong>{{ valor }}</strong> foi enviado <strong>{{ contagem }}</strong> vezes.
+    </div>
+
+    <h3>Valores Recebidos</h3>
+
+    <div class="list">
+        <div class="item" *ngFor="let item of paginaAtual()">
+            <span>{{ item.valor }}</span>
+            <span class="badge">{{ item.contagem }}x</span>
+        </div>
+    </div>
+
+    <div class="paginacao" *ngIf="listaValores.length > 5">
+        <button (click)="anterior()" [disabled]="pagina === 0">← Anterior</button>
+        <span style="padding: 0px 10px;">Página {{ pagina + 1 }} de {{ totalPaginas() }}</span>
+        <button (click)="proximo()" [disabled]="(pagina + 1) >= totalPaginas()">Próximo →</button>
+    </div>
+</div>
